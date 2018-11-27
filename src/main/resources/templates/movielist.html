@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Movie Diary</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}" />
+<style>
+.rating {
+	display: inline;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<h1>Movie Diary</h1>
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
+	</div>
+	<!-- Table to list the added movies -->
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Title</th>
+				<th>Year</th>
+				<th>Genre</th>
+				<th>Type</th>
+				<th>Rating</th>
+				<th>IMDb</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="movie, iStat : ${movies}">
+				<td>
+					<img th:src="${movie?.poster}" />
+				</td>
+				<td th:text="${movie?.title}">${movie.title}</td>
+				<td th:text="${movie?.year}">${movie.year}</td>
+				<td th:text="${movie?.genre}">${movie.genre}</td>
+				<td th:text="${movie?.type}">${movie.type}</td>
+				<td th:text="${movie?.rating}" th:attr="data-rating=${movie.rating}+':'+${movie.id}">
+				</td>
+				<td><a th:href="@{https://www.imdb.com/find?q={query}(query=${movie.title})}" target="_blank">IMDb</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${movie.id})}" class="btn btn-danger">Delete</a></td>
+				<td><a th:href="@{/edit/{id}(id=${movie.id})}"><button class="btn btn-default">Edit</button></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="/add"><button class="btn btn-success">Add Movie</button> </a>
+<script>
+function refreshRatings() {
+	Array.from(document.querySelectorAll('[data-rating]')).forEach(el => {
+		const ratingAndId = el.getAttribute('data-rating').split(':');
+		const rating = Number(ratingAndId[0]);
+		const id = ratingAndId[1];
+		const div = '<div class="rating" onclick="setRating(!num;, ' + id + ')">!symbol;</div>';
+		const divs = [];
+		for(let i = 0; i < 5; i++) {
+			const html = div.replace('!num;', i + 1);
+			if (rating > i) {
+				divs.push(html.replace('!symbol;', '😀'));
+			} else {
+				divs.push(html.replace('!symbol;', '☹'));
+			}
+		}
+		el.innerHTML = divs.join('');
+	});
+}
+
+refreshRatings();
+
+function setRating(rating, id) {
+	fetch('/rate/' + id + '/' + rating).then(() => {
+		document.querySelector('[data-rating*=":' + id + '"]').setAttribute('data-rating', rating + ':' + id);
+		refreshRatings();
+	});
+}
+</script>
+</body>
+</html>
