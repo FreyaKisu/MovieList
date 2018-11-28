@@ -17,7 +17,7 @@
 </head>
 <body>
 	<div class="container vertical-center col-md-6 col-md-offset-6">
-		<h2 class="p-3"></h2>
+		<h2 class="text-info p-3"></h2>
 		<br>
 		<div class="alert alert-danger" th:if="${param.error}">Invalid
 			username and password.</div>
@@ -35,7 +35,7 @@
 				</label> <br>
 			</div>
 			<div>
-				<input type="submit" value="Sign In" class=" btn btn-success" />
+				<input type="submit" value="Sign In" class=" btn btn-outline-success" />
 			</div>
 			<a th:href="@{/signup}">Sign-up</a>
 		</form>

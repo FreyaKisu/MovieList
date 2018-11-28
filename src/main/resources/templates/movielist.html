@@ -12,23 +12,21 @@
 </style>
 </head>
 <body>
-<div class="mx-auto container">
-<div class="row">
-    <div class="col-md-4">
-        	<h1>Movie Diary</h1>
-        	<br>
-	    </div>
-	    </div>
+
+    <ul class="nav justify-content-center">
+        	<li><h1 class="">Movie Diary</h1></li>
+	    </ul>
+	    <div class="mx-auto container">
 <div class="col-md-8">
-		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h3>
+		<h3 th:inline="text" class="text-secondary">Welcome [[${#httpServletRequest.remoteUser}]]!</h3>
 		<br>
 		<br>
-		<p>Here you can add the movies you are planning to watch or did already and rate them.</p>
+		<p class="text-muted">Here you can add the movies you are planning to watch or did already and rate them.</p>
 		<br>
 	</div>
 	<div class="col-md-4" style="padding:20px 0">
 		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class=" btn btn-dark"/>
+			<input type="submit" value="Sign Out" class=" btn btn-outline-secondary"/>
 			<br>
 		</form>
 	</div>
@@ -59,12 +57,12 @@
 				<td th:text="${movie?.rating}" th:attr="data-rating=${movie.rating}+':'+${movie.id}">
 				</td>
 				<td><a th:href="@{https://www.imdb.com/find?q={query}(query=${movie.title})}" target="_blank">IMDb</a></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${movie.id})}" class="btn btn-danger">Delete</a></td>
-				<td><a th:href="@{/edit/{id}(id=${movie.id})}"><button class="btn btn-default">Edit</button></a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${movie.id})}" class="btn btn-outline-danger">Delete</a></td>
+				<td><a th:href="@{/edit/{id}(id=${movie.id})}"><button class="btn btn-outline-warning">Edit</button></a></td>
 			</tr>
 		</tbody>
 	</table>
-	<a href="/add"><button class="btn btn-success">Add Movie</button> </a>
+	<a href="/add"><button class="btn btn-outline-success">Add Movie</button> </a>
 	</div>
 <script>
 function refreshRatings() {

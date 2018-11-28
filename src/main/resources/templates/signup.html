@@ -7,7 +7,7 @@
 	th:href="@{css/css/bootstrap.min.css}" />
 </head>
 <body>
-	<h2>Sign-up</h2>
+	<h2 class="text-secondary">Sign-up</h2>
 	<br>
      <div class="container col-md-8">
 		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
@@ -24,7 +24,7 @@
 				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
 			</div>
 			
-			<input type="submit" class="btn btn-primary" value="Signup"></input>		
+			<input type="submit" class="btn btn-outline-success" value="Signup"></input>		
 		</form>
 	</div>
 	<br>
