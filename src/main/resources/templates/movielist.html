@@ -12,15 +12,15 @@
 </style>
 </head>
 <body>
-<div class="container">
+<div class="mx-auto container">
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
         	<h1>Movie Diary</h1>
         	<br>
 	    </div>
 	    </div>
-<div class="col-md-4">
-		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]] !</h3>
+<div class="col-md-8">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h3>
 		<br>
 		<br>
 		<p>Here you can add the movies you are planning to watch or did already and rate them.</p>
@@ -28,7 +28,8 @@
 	</div>
 	<div class="col-md-4" style="padding:20px 0">
 		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+			<input type="submit" value="Sign Out" class=" btn btn-dark"/>
+			<br>
 		</form>
 	</div>
 	<!-- Table to list the added movies -->
@@ -41,7 +42,6 @@
 				<th>Genre</th>
 				<th>Type</th>
 				<th>Rating</th>
-				<th>IMDb</th>
 				<th>IMDb</th>
 				<th> </th>
 				<th> </th>

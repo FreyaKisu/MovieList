@@ -7,22 +7,27 @@
 	th:href="@{/css/css/bootstrap.min.css}" />
 </head>
 <body>
-	<div class="container col-md-4 col-md-offset-4">
-		<h2>Edit the movie details</h2>
+	<br>
+	<br>
+	<div class="container center col-md-4 col-md-offset-6">
+		<h2>Edit the attributes</h2>
 		<br>
 
 		<form th:object="${movie}" th:action="@{../save}" action="#"
 			method="post">
 			<input type="hidden" th:field="*{id}" class="form-control" /> <input
 				type="hidden" th:field="*{poster}" /> <input type="text"
-				th:field="*{title}" /> <input type="text" th:field="*{year}" /> <input
-				type="text" th:field="*{genre}" /> <label for="deplist">Type</label>
-			<select id="catlist" th:field="*{type}" class="form-control">
+				th:field="*{title}" /> <br>
+			<br> <input type="text" th:field="*{year}" /> <br> <br>
+			<input type="text" th:field="*{genre}" /> <br> <br> <label
+				for="deplist">Movie type:</label> <select id="catlist"
+				th:field="*{type}" class="form-control">
 				<option
 					th:each="movietype: ${T(fi.project.movielist.domain.MovieType).values()}"
 					th:value="${movietype}" th:text="${movietype}"></option>
-			</select> <input type="text" th:field="*{rating}" /> <input type="submit"
-				class="btn btn-success" value="Save"></input>
+			</select><br> <input type="text" th:field="*{rating}" /> <br> <br>
+			<input type="submit" class="btn btn-primary" value="Save"></input>
 		</form>
+	</div>
 </body>
 </html>
