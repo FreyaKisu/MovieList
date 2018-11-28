@@ -3,11 +3,16 @@
 <head>
 <title>Movie Diary</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
 <link type="text/css" rel="stylesheet" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}" />
 <style>
 .rating {
 	display: inline;
 	cursor: pointer;
+}
+
+.container {
+	margin-bottom: 20px
 }
 </style>
 </head>
@@ -62,7 +67,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<a href="/add"><button class="btn btn-outline-success">Add Movie</button> </a>
+	<a href="/add" class="btn btn-outline-success">Add Movie </a>
 	</div>
 <script>
 function refreshRatings() {
