@@ -7,45 +7,53 @@
 	th:href="@{/css/css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Add Movie to your diary and rate it</h1>
-	<div>
-		<form onsubmit="return doSearch()">
-		Search:
-		<input type="text" id="search-movie-input" />
-		<input type="submit" value="Search!"/>
-		</form>
-		<select id="search-movie-results" onchange="fillFields()" style="display:none"></select>
-	</div>
-	<div>
-	<img id="selected-movie-poster"/>
-		<form th:object="${movie}" th:action="@{save}" action="#" method="post">
-			<input type="hidden" id="poster" th:field="*{poster}"/> 
-			<label for="title">Title</label> <input type="text" id="title"
-				th:field="*{title}" />
-				<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<label for="year">Year</label> <input type="text" id="year"
-				th:field="*{year}" />
-				<div th:if="${#fields.hasErrors('year')}" th:errors="*{tyear}">Year Error</div>
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<label for="genre">Genre</label> <input type="text"
-				th:field="*{genre}" />
-				<div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre Error</div>
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<label for="deplist">Movie type</label> <select id="type"
-				th:field="*{type}" class="form-control">
-				<option th:each="movietype: ${T(fi.project.movielist.domain.MovieType).values()}"
-					th:value="${movietype}" th:text="${movietype}"></option>
-					</select>
-				<label for="rating">Rating</label>
-				<div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating Error</div>
+	<div class="container center col-md-4 col-md-offset-4">
+		<h2>Add Movie to your diary and rate it</h2>
+		<br>
+		<div>
+			<form onsubmit="return doSearch()">
+				Search: <input type="text" id="search-movie-input" /> <input
+					type="submit" value="Search" />
+			</form>
+			<select id="search-movie-results" onchange="fillFields()"
+				style="display: none"></select>
+		</div>
+		<div>
+			<img id="selected-movie-poster" />
+			<form th:object="${movie}" th:action="@{save}" action="#"
+				method="post">
+				<input type="hidden" id="poster" th:field="*{poster}" /> <label
+					for="title">Title</label> <input type="text" id="title"
+					th:field="*{title}" />
+				<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title
+					Error</div>
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="year">Year</label> <input type="text" id="year"
+					th:field="*{year}" />
+				<div th:if="${#fields.hasErrors('year')}" th:errors="*{tyear}">Year
+					Error</div>
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="genre">Genre</label> <input type="text"
+					th:field="*{genre}"/>
+				<div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre
+					Error</div>
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="deplist">Movie type</label> <select id="type"
+					th:field="*{type}" class="form-control">
+					<option
+						th:each="movietype: ${T(fi.project.movielist.domain.MovieType).values()}"
+						th:value="${movietype}" th:text="${movietype}"></option>
+				</select> <label for="rating">Rating</label>
+				<div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating
+					Error</div>
 				<input type="text" th:field="*{rating}" />
 				<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="submit" value="Save"></input>
-		</form>
-	</div>
-	
-<script>
+			</form>
+		</div>
+		</div>
+
+		<script>
 	let results;
 	function doSearch() {
 		const title = document.getElementById('search-movie-input').value;
@@ -54,7 +62,7 @@
 			.then(response => {
 				response.json().then(movieArray => {
 					if (movieArray.length === 0) {
-						alert('no movies found!');
+						alert('No movies have been found with the given title.');
 						return;
 					}
 	            	results = movieArray;
@@ -79,7 +87,7 @@
 			}
 		})).join('');
 		
-		selElement.innerHTML = '<option value="none">Select...</option>' + html;
+		selElement.innerHTML = '<option value="none">Select the movie...</option>' + html;
 	}
 	
 	function fillFields() {

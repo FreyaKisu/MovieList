@@ -12,9 +12,19 @@
 </style>
 </head>
 <body>
-	<h1>Movie Diary</h1>
-	<div class="col-md-4">
-		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+<div class="container">
+<div class="row">
+    <div class="col-md-12">
+        	<h1>Movie Diary</h1>
+        	<br>
+	    </div>
+	    </div>
+<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]] !</h3>
+		<br>
+		<br>
+		<p>Here you can add the movies you are planning to watch or did already and rate them.</p>
+		<br>
 	</div>
 	<div class="col-md-4" style="padding:20px 0">
 		<form th:action="@{/logout}" method="post">
@@ -32,6 +42,9 @@
 				<th>Type</th>
 				<th>Rating</th>
 				<th>IMDb</th>
+				<th>IMDb</th>
+				<th> </th>
+				<th> </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -52,6 +65,7 @@
 		</tbody>
 	</table>
 	<a href="/add"><button class="btn btn-success">Add Movie</button> </a>
+	</div>
 <script>
 function refreshRatings() {
 	Array.from(document.querySelectorAll('[data-rating]')).forEach(el => {
