@@ -1,4 +1,3 @@
-
 package fi.project.movielist;
 
 import org.springframework.beans.factory.annotation.Autowired;

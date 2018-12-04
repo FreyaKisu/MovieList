@@ -41,7 +41,7 @@ public class MovieRepositoryTest {
 		assertThat(movies.get(0).getGenre()).isEqualTo("sci-fi");
 		assertThat(movies.get(0).getUser().getUsername()).isEqualTo("me");
 		assertThat(movies.get(0).getUser().getPasswordHash()).isEqualTo("strong password");
-		assertThat(movies.get(0).getUser().getRole()).isEqualTo("queen");
+		assertThat(movies.get(0).getUser().getRole()).isEqualTo("kisuli");
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class MovieRepositoryTest {
 		movie.setTitle("star wars");
 		movie.setYear(1234);
 		movie.setType(MovieType.MOVIE);
-		User user = new User("me", "strong password", "queen");
+		User user = new User("me", "strong password", "kisuli");
 		userRepository.save(user);
 		movie.setUser(user);
 
